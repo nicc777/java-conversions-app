@@ -14,8 +14,9 @@ jobs:
         run: mvn --batch-mode --update-snapshots verify
       - name: Prepare a staging directory
         run: mkdir staging && cp target/*.jar staging
-      - name: Upload to staging directory
+      - name: Upload to artifacts directory
         uses: actions/upload-artifact@v2
         with:
           name: Package
           path: staging
+          retention-days: 5
