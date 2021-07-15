@@ -60,7 +60,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}{% raw %}
+          images: java-conversions-app
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
