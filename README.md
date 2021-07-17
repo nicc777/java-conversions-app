@@ -34,3 +34,17 @@ Same as above, but on a custom port `9999`:
 ```shell
 python3 -m http.server 9999
 ```
+
+## Trigger a release build
+
+Bump the version in `pom.xml`. Store this version value in the environment variable `VERSION`
+
+Then commit and push.
+
+Add a new tag:
+
+```shell
+git tag -a $VERSION -m "Release trigger for version ${VERSION}"
+
+git push origin --tags
+```
