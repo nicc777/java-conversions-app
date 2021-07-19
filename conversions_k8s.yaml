@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: conversions-deployment
+  name: conversions-deployment-v1
 spec:
   selector:
     matchLabels:
-      app: conversions
+      app: conversions-v1
   replicas: 4 # tells deployment to run 4 pods matching the template
   template:
     metadata:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: conversions
-        image: ghcr.io/nicc777/java-conversions-app::v1.1.1
+        image: ghcr.io/nicc777/java-conversions-app@sha256:v1.1.2
         ports:
         - containerPort: 8888
         livenessProbe:
@@ -37,11 +37,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: conversions-service
+  name: conversions-service-v1
 spec:
   type: NodePort
   selector:
-    app: conversions
+    app: conversions-v1
   ports:
     - protocol: TCP
       port: 9080
@@ -50,7 +50,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: conversions-ingress
+  name: conversions-ingress-v1
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -61,6 +61,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: conversions-service
+            name: conversions-service-v1
             port:
               number: 9080
