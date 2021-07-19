@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
       - name: conversions
-        image: nicc777/conversions:v0.0.2
+        image: ghcr.io/nicc777/java-conversions-app::v1.1.1
         ports:
         - containerPort: 8888
         livenessProbe:
           httpGet:
-            path: /api/liveness
+            path: /conversions/v1/liveness
             port: 8888
             scheme: HTTP
           initialDelaySeconds: 15
@@ -28,7 +28,7 @@ spec:
           failureThreshold: 3
         readinessProbe:
           httpGet:
-            path: /api/readiness
+            path: /conversions/v1/readiness
             port: 8888
             scheme: HTTP
           initialDelaySeconds: 15
@@ -57,7 +57,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /conversions/v1
         pathType: Prefix
         backend:
           service:
