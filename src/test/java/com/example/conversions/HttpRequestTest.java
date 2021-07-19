@@ -24,12 +24,12 @@ public class HttpRequestTest {
     
     @Test
     void convertCtoFTest() throws Exception {
-        mockMvc.perform(get("/v1/convert/c-to-f/15.0")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("59.0")));
+        mockMvc.perform(get("/conversions/v1/convert/c-to-f/15.0")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("59.0")));
     }
 
     @Test
     void convertFtoCTest() throws Exception {
-        mockMvc.perform(get("/v1/convert/f-to-c/59.0")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("15.0")));
+        mockMvc.perform(get("/conversions/v1/convert/f-to-c/59.0")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("15.0")));
     }
 
 }
