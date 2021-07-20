@@ -1,5 +1,7 @@
 package com.example.conversions.models;
 
+import com.example.conversions.utils.Generated;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Generated
 public class ConversionResponse {
     
     private String inputUnit;

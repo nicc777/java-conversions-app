@@ -7,6 +7,7 @@ import com.example.conversions.models.ConversionStrategy;
 import com.example.conversions.models.ConversionResponse;
 import com.example.conversions.services.ApplicationStateService;
 import com.example.conversions.services.TemperatureConversionService;
+import com.example.conversions.utils.Generated;
 import com.example.conversions.utils.OsFunctions;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +38,14 @@ public class TempConvetController {
 	ApplicationStateService applicationStateService;
 
     @GetMapping("/liveness")
+    @Generated
     public String liveness() {
         log.info("[" + osFunctions.getHostname() + "] liveness() called");
         return "ok";
     }
 
     @GetMapping("/readiness")
+    @Generated
     public String readiness() {
         log.info("[" + osFunctions.getHostname() + "] readiness() called");
         if (!applicationStateService.isReady()){
@@ -79,9 +82,11 @@ public class TempConvetController {
     }
 
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE, reason="The service is not in a ready state")
+    @Generated
     public class ServiceNotReadyException extends RuntimeException {}
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason="The conversion request is not yet supported")
+    @Generated
     public class InvalidRequestException extends RuntimeException {}
 
 }

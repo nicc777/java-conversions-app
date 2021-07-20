@@ -3,6 +3,7 @@ package com.example.conversions;
 import javax.annotation.PreDestroy;
 
 import com.example.conversions.services.ApplicationStateService;
+import com.example.conversions.utils.Generated;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +20,7 @@ public class ConversionsDemoApplication {
 	}
 
 	@PreDestroy
+	@Generated
 	public void tearDown() {
 		try {
 			applicationStateService.prepareForTermination();
