@@ -8,12 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.Matchers.containsString;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -24,12 +26,26 @@ public class HttpRequestTest {
     
     @Test
     void convertCtoFTest() throws Exception {
-        mockMvc.perform(get("/conversions/v1/convert/c-to-f/15.0")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("59.0")));
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+			.post("/conversions/v2/convert")
+			.accept(MediaType.APPLICATION_JSON).content("{\"sourceUnit\": \"Celsius\",\"destinationUnit\": \"Fahrenheit\",\"value\": \"15\"}")
+			.contentType(MediaType.APPLICATION_JSON);
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        MockHttpServletResponse response = result.getResponse();
+        assertTrue(response.getStatus() == 200);
+        assertTrue(response.getContentAsString().contains("59.0"));
     }
 
     @Test
     void convertFtoCTest() throws Exception {
-        mockMvc.perform(get("/conversions/v1/convert/f-to-c/59.0")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("15.0")));
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+			.post("/conversions/v2/convert")
+			.accept(MediaType.APPLICATION_JSON).content("{\"sourceUnit\": \"Fahrenheit\",\"destinationUnit\": \"Celsius\",\"value\": \"59\"}")
+			.contentType(MediaType.APPLICATION_JSON);
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+        MockHttpServletResponse response = result.getResponse();
+        assertTrue(response.getStatus() == 200);
+        assertTrue(response.getContentAsString().contains("15.0"));
     }
 
 }
