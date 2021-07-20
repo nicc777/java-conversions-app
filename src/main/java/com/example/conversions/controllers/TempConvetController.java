@@ -2,7 +2,9 @@ package com.example.conversions.controllers;
 
 import javax.annotation.PostConstruct;
 
-import com.example.conversions.models.TemperatureConversionResponse;
+import com.example.conversions.models.ConversionRequestBody;
+import com.example.conversions.models.ConversionStrategy;
+import com.example.conversions.models.ConversionResponse;
 import com.example.conversions.services.ApplicationStateService;
 import com.example.conversions.services.TemperatureConversionService;
 import com.example.conversions.utils.OsFunctions;
@@ -10,15 +12,18 @@ import com.example.conversions.utils.OsFunctions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 @RestController
-@RequestMapping("/conversions/v1")
+@RequestMapping("/conversions/v2")
 @Slf4j
 public class TempConvetController {
 
@@ -47,22 +52,21 @@ public class TempConvetController {
         return "ok";
     }
 
-    @GetMapping("/convert/c-to-f/{degrees}")
-    public TemperatureConversionResponse convertCtoF(@PathVariable String degrees) {
+    @PostMapping("/convert")
+    public ConversionResponse convertAny(@RequestBody ConversionRequestBody conversionRequestBody) {
         if (!applicationStateService.isReady())
             throw new ServiceNotReadyException();
-        Double degreesFahrenheit  = temperatureConversionService.celsiusToFahrenheit(Double.parseDouble(degrees));
-        log.info("[" + osFunctions.getHostname() + "] " + degrees + " celsius is " + degreesFahrenheit + " degrees fahrenheit");
-        return new TemperatureConversionResponse("celsius", Double.parseDouble(degrees), degreesFahrenheit, "fahrenheit");
-    }
-
-    @GetMapping("/convert/f-to-c/{degrees}")
-    public TemperatureConversionResponse convertFtoC(@PathVariable String degrees) {
-        if (!applicationStateService.isReady())
-            throw new ServiceNotReadyException();
-        Double degreesCelsius  =  temperatureConversionService.fahrenheitToCelsius(Double.parseDouble(degrees));
-        log.info("[" + osFunctions.getHostname() + "] " + degrees + " fahrenheit is " + degreesCelsius + " degrees celsius");
-        return new TemperatureConversionResponse("fahrenheit", Double.parseDouble(degrees), degreesCelsius, "celsius");
+        try {
+            log.info("Raw request body: " + conversionRequestBody.toString());
+            String requestedStrategy = conversionRequestBody.getSourceUnit().toUpperCase() + "_TO_" + conversionRequestBody.getDestinationUnit().toUpperCase();
+            ConversionStrategy conversionStrategy = ConversionStrategy.valueOf(requestedStrategy);
+            Double result = conversionStrategy.convert(Double.parseDouble(conversionRequestBody.getValue()));
+            log.info("[" + osFunctions.getHostname() + "] " + conversionRequestBody.getValue() + " " + conversionRequestBody.getSourceUnit().toLowerCase() + " is " + result + " in " + conversionRequestBody.getDestinationUnit().toLowerCase());
+            return new ConversionResponse(conversionRequestBody.getSourceUnit(), Double.parseDouble(conversionRequestBody.getValue()), result, conversionRequestBody.getDestinationUnit());
+        } catch(Exception e) {
+            log.error("EXCEPTION: " + ExceptionUtils.getStackTrace(e));
+        }
+        throw new InvalidRequestException();
     }
 
     @PostConstruct
@@ -76,5 +80,8 @@ public class TempConvetController {
 
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE, reason="The service is not in a ready state")
     public class ServiceNotReadyException extends RuntimeException {}
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason="The conversion request is not yet supported")
+    public class InvalidRequestException extends RuntimeException {}
 
 }

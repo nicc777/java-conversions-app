@@ -11,14 +11,14 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class TemperatureConversionResponse {
+public class ConversionResponse {
     
-    private String inputDegreesUnit;
+    private String inputUnit;
 
-    private Double inputDegrees;
+    private Double inputValue;
 
-    private Double convertedDegrees;
+    private Double convertedValue;
 
-    private String convertedDegreesUnit;
+    private String convertedUnit;
 
 }
