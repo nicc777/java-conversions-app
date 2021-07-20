@@ -1,5 +1,7 @@
 package com.example.conversions.models;
 
+import com.example.conversions.utils.Generated;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,14 +13,15 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class TemperatureConversionResponse {
+@Generated
+public class ConversionResponse {
     
-    private String inputDegreesUnit;
+    private String inputUnit;
 
-    private Double inputDegrees;
+    private Double inputValue;
 
-    private Double convertedDegrees;
+    private Double convertedValue;
 
-    private String convertedDegreesUnit;
+    private String convertedUnit;
 
 }
