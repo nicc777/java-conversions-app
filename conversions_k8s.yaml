@@ -19,7 +19,7 @@ spec:
         - containerPort: 8888
         livenessProbe:
           httpGet:
-            path: /conversions/v1/liveness
+            path: /conversions/v2/liveness
             port: 8888
             scheme: HTTP
           initialDelaySeconds: 20
@@ -28,7 +28,7 @@ spec:
           failureThreshold: 3
         readinessProbe:
           httpGet:
-            path: /conversions/v1/readiness
+            path: /conversions/v2/readiness
             port: 8888
             scheme: HTTP
           initialDelaySeconds: 20
