@@ -10,10 +10,10 @@ spec:
   template:
     metadata:
       labels:
-        app: conversions
+        app: conversions-v1
     spec:
       containers:
-      - name: conversions
+      - name: conversions-v1
         image: ghcr.io/nicc777/java-conversions-app@sha256:v1.1.2
         ports:
         - containerPort: 8888
