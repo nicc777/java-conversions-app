@@ -6,32 +6,32 @@ spec:
   selector:
     matchLabels:
       app: conversions-v2
-  replicas: 4 # tells deployment to run 4 pods matching the template
+  replicas: 2
   template:
     metadata:
       labels:
-        app: conversions
+        app: conversions-v2
     spec:
       containers:
-      - name: conversions
+      - name: conversions-v2
         image: ghcr.io/nicc777/java-conversions-app@sha256:v2.0.0
         ports:
         - containerPort: 8888
         livenessProbe:
           httpGet:
-            path: /conversions/v1/liveness
+            path: /conversions/v2/liveness
             port: 8888
             scheme: HTTP
-          initialDelaySeconds: 15
+          initialDelaySeconds: 20
           periodSeconds: 5
           successThreshold: 1
           failureThreshold: 3
         readinessProbe:
           httpGet:
-            path: /conversions/v1/readiness
+            path: /conversions/v2/readiness
             port: 8888
             scheme: HTTP
-          initialDelaySeconds: 15
+          initialDelaySeconds: 20
           periodSeconds: 5
 ---
 apiVersion: v1
