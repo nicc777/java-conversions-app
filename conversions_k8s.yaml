@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: conversions-v2
-  replicas: 4 # tells deployment to run 4 pods matching the template
+  replicas: 2
   template:
     metadata:
       labels:
