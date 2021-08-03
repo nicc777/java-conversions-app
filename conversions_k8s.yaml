@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: conversions-v2
-        image: ghcr.io/nicc777/java-conversions-app@sha256:v2.0.0
+        image: ghcr.io/nicc777/java-conversions-app:v2.0.5
         ports:
         - containerPort: 8888
         livenessProbe:
