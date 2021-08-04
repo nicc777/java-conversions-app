@@ -35,6 +35,16 @@ Same as above, but on a custom port `9999`:
 python3 -m http.server 9999
 ```
 
+## Preparing for a new release
+
+Update the following:
+
+* Bump the version in `pom.xml`
+* Update the version in `conversions-chart/values.yaml` in parameter named `application_container_version` to match application version as defined in `pom.xml`
+* In the file `conversions-chart/Chart.yaml` update:
+  * Bump the `version` (this is the Helm version)
+  * Ensure the `appVersion` is the same value as defined in `pom.xml`
+
 ## Trigger a release build
 
 Bump the version in `pom.xml`. Store this version value in the environment variable `VERSION`
