@@ -1,3 +1,7 @@
-favorite:
-  drink: coffee
-  food: pizza
+conversions:
+  temp_c_to_f: Celsius to Fahrenheit 
+  temp_f_to_c: Fahrenheit to Celsius
+ingres_service_port: 9080
+application_port: 8888
+replica_count: 2
+application_container_version: v2.1.0
