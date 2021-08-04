@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: conversions-deployment-v2
+  name: {{ .Release.Name }}-deployment-v2
 spec:
   selector:
     matchLabels:
-      app: conversions-v2
-  replicas: 2
+      app: {{ .Release.Name }}-v2
+  replicas: {{ .Values.replica_count }}
   template:
     metadata:
       labels:
-        app: conversions-v2
+        app: {{ .Release.Name }}-v2
     spec:
       containers:
-      - name: conversions-v2
-        image: ghcr.io/nicc777/java-conversions-app:v2.0.5
+      - name: {{ .Release.Name }}-v2
+        image: {{ printf "ghcr.io/nicc777/java-conversions-app:%s" .Values.application_container_version }}
         ports:
-        - containerPort: 8888
+        - containerPort: {{ .Values.application_port }}
         livenessProbe:
           httpGet:
             path: /conversions/v2/liveness
-            port: 8888
+            port: {{ .Values.application_port }}
             scheme: HTTP
           initialDelaySeconds: 20
           periodSeconds: 5
@@ -29,7 +29,7 @@ spec:
         readinessProbe:
           httpGet:
             path: /conversions/v2/readiness
-            port: 8888
+            port: {{ .Values.application_port }}
             scheme: HTTP
           initialDelaySeconds: 20
           periodSeconds: 5
@@ -37,20 +37,20 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: conversions-service-v2
+  name: {{ .Release.Name }}-service-v2
 spec:
   type: NodePort
   selector:
-    app: conversions-v2
+    app: {{ .Release.Name }}-v2
   ports:
     - protocol: TCP
-      port: 9080
-      targetPort: 8888
+      port: {{ .Values.ingres_service_port }}
+      targetPort: {{ .Values.application_port }}
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: conversions-ingress-v2
+  name: {{ .Release.Name }}-ingress-v2
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -61,6 +61,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: conversions-service-v2
+            name: {{ .Release.Name }}-service-v2
             port:
-              number: 9080
+              number: {{ .Values.ingres_service_port }}
