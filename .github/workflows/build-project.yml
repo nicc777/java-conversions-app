@@ -37,5 +37,4 @@ jobs:
         with:
           charts_dir: charts
         env:
-          CR_INDEX_PATH: docs/
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
