@@ -3,12 +3,12 @@ entries:
   conversions-chart:
   - apiVersion: v2
     appVersion: 2.1.8
-    created: "2021-08-06T03:32:53.241155553Z"
-    description: A Helm chart for Kubernetes
-    digest: 9740501ec7e22406b1c5a7546c6851fcc65cb79f5a7b89bc3170f9b1b62f2667
+    created: "2021-08-06T03:51:58.449303727Z"
+    description: Conversions Service API
+    digest: 11ab079ff461429c7a92ddf1cd384a5e522bf9afb350190fcea4dc10142ba2ec
     name: conversions-chart
     type: application
     urls:
-    - https://github.com/nicc777/java-conversions-app/releases/download/conversions-chart-0.1.10/conversions-chart-0.1.10.tgz
-    version: 0.1.10
-generated: "2021-08-06T03:32:53.241161553Z"
+    - https://github.com/nicc777/java-conversions-app/releases/download/conversions-chart-0.1.11/conversions-chart-0.1.11.tgz
+    version: 0.1.11
+generated: "2021-08-06T03:51:58.449309627Z"
