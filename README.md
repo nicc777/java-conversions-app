@@ -35,11 +35,25 @@ Same as above, but on a custom port `9999`:
 python3 -m http.server 9999
 ```
 
-## Trigger a release build
+## Preparing for a new release
 
-Bump the version in `pom.xml`. Store this version value in the environment variable `VERSION`
+Update the following:
 
-Then commit and push.
+* Bump the version in `pom.xml`
+* Update the version in `conversions-chart/values.yaml` in parameter named `application_container_version` to match application version as defined in `pom.xml`
+* In the file `conversions-chart/Chart.yaml` update:
+  * Bump the `version` (this is the Helm version)
+  * Ensure the `appVersion` is the same value as defined in `pom.xml`
+
+## Trigger a release build (new application version)
+
+Bump the version in the following files: 
+
+* `pom.xml`
+* `charts/conversions-chart/Chart.yaml` (specifically, the field `appVersion`) (not required for `V1`)
+* `charts/conversions-chart/values.yaml` (specifically, the fields `application_container_version`) (not required for `V1`)
+
+Store this version value in the environment variable `VERSION`. Then commit and push.
 
 Add a new tag:
 
@@ -48,3 +62,9 @@ git tag -a $VERSION -m "Release trigger for version ${VERSION}"
 
 git push origin --tags
 ```
+
+## Helm Chart Updates
+
+_*Important*_: If you make changes to the Helm Charts, also remember to update the `version` in the file `charts/conversions-chart/Chart.yaml`.
+
+When you push to the release branch, a new build will be made, and any changes to the Helm configuration will now trigger a new Helm release.
