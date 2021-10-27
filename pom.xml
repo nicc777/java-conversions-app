@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>conversions</artifactId>
-	<version>2.1.10</version>	<!-- This should match our tag -->
+	<version>2.1.12</version>	<!-- This should match our tag -->
 	<name>Conversions Demo</name>
 	<description>REST application to do various conversions.</description>
 	<properties>
