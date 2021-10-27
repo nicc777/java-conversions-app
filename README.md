@@ -53,15 +53,24 @@ Bump the version in the following files:
 * `charts/conversions-chart/Chart.yaml` (specifically, the field `appVersion`) (not required for `V1`)
 * `charts/conversions-chart/values.yaml` (specifically, the fields `application_container_version`) (not required for `V1`)
 
-Store this version value in the environment variable `VERSION`. Then commit and push.
-
-Add a new tag:
+Remember to push to the `v2` (or `v1`) branch, but not that the actions may fail sine there is already a release:
 
 ```shell
+git push origin v2
+```
+
+Store the version value in the environment variable `VERSION`. Then commit and push.
+
+Add a new tag (showing an example for version 2):
+
+```shell
+export VERSION=.....
+
 git tag -a $VERSION -m "Release trigger for version ${VERSION}"
 
 git push origin --tags
 ```
+
 
 ## Helm Chart Updates
 
