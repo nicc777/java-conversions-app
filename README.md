@@ -55,9 +55,13 @@ Bump the version in the following files:
 
 Store this version value in the environment variable `VERSION`. Then commit and push.
 
-Add a new tag:
+Add a new tag (showing an example for version 2):
 
 ```shell
+git push origin v2
+
+export VERSION=.....
+
 git tag -a $VERSION -m "Release trigger for version ${VERSION}"
 
 git push origin --tags
