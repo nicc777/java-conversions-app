@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   conversions-chart:
   - apiVersion: v2
+    appVersion: 2.1.14
+    created: "2021-10-31T08:43:34.191706161Z"
+    description: Conversions Service API
+    digest: 4442c76d5ea2bc15eb07c7d80a4e0d4f18b7fb2f84d3e0441965471289e30d24
+    name: conversions-chart
+    type: application
+    urls:
+    - https://github.com/nicc777/java-conversions-app/releases/download/conversions-chart-2.1.14/conversions-chart-2.1.14.tgz
+    version: 2.1.14
+  - apiVersion: v2
     appVersion: 2.1.6
     created: "2021-08-06T04:20:04.195217073Z"
     description: Conversions Service API
@@ -31,4 +41,4 @@ entries:
     urls:
     - https://github.com/nicc777/java-conversions-app/releases/download/conversions-chart-0.1.11/conversions-chart-0.1.11.tgz
     version: 0.1.11
-generated: "2021-08-06T04:20:04.195228673Z"
+generated: "2021-10-31T08:43:34.191733061Z"
