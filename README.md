@@ -35,7 +35,7 @@ Same as above, but on a custom port `9999`:
 python3 -m http.server 9999
 ```
 
-## Preparing for a new release
+## Trigger a release build (new application version)
 
 Update the following:
 
@@ -44,14 +44,6 @@ Update the following:
 * In the file `conversions-chart/Chart.yaml` update:
   * Bump the `version` (this is the Helm version)
   * Ensure the `appVersion` is the same value as defined in `pom.xml`
-
-## Trigger a release build (new application version)
-
-Bump the version in the following files: 
-
-* `pom.xml`
-* `charts/conversions-chart/Chart.yaml` (specifically, the field `appVersion`) (not required for `V1`)
-* `charts/conversions-chart/values.yaml` (specifically, the fields `application_container_version`) (not required for `V1`)
 
 Remember to push to the `v2` (or `v1`) branch, but note that the actions may fail sine there is already a release:
 
