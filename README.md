@@ -48,6 +48,8 @@ Update the following:
 Remember to push to the `v2` (or `v1`) branch, but note that the actions may fail sine there is already a release:
 
 ```shell
+git add .
+git commit -m "refactor: bumped to version 2.x.x"
 git push origin v2
 ```
 
@@ -58,7 +60,7 @@ Add a new tag (showing an example for version 2):
 ```shell
 export VERSION=.....
 
-git tag -a $VERSION -m "Release trigger for version ${VERSION}"
+git tag -a v$VERSION -m "Release trigger for version ${VERSION}"
 
 git push origin --tags
 ```
