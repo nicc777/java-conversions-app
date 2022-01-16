@@ -35,7 +35,7 @@ Same as above, but on a custom port `9999`:
 python3 -m http.server 9999
 ```
 
-## Preparing for a new release
+## Trigger a release build (new application version)
 
 Update the following:
 
@@ -45,32 +45,20 @@ Update the following:
   * Bump the `version` (this is the Helm version)
   * Ensure the `appVersion` is the same value as defined in `pom.xml`
 
-## Trigger a release build (new application version)
-
-Bump the version in the following files: 
-
-* `pom.xml`
-* `charts/conversions-chart/Chart.yaml` (specifically, the field `appVersion`) (not required for `V1`)
-* `charts/conversions-chart/values.yaml` (specifically, the fields `application_container_version`) (not required for `V1`)
-
-Remember to push to the `v2` (or `v1`) branch, but not that the actions may fail sine there is already a release:
-
-```shell
-git push origin v2
-```
+Remember to push to the `v2` (or `v1`) branch, but note that the actions may fail sine there is already a release:
 
 Store the version value in the environment variable `VERSION`. Then commit and push.
 
-Add a new tag (showing an example for version 2):
-
 ```shell
-export VERSION=.....
+export VERSION=2.x.x
+git add .
+git commit -m "chore: bumped to version $VERSION"
+git tag -a v$VERSION -m "Release trigger for version ${VERSION}"
+git push origin v2
 
-git tag -a $VERSION -m "Release trigger for version ${VERSION}"
-
+# Wait until the Git Action completes....
 git push origin --tags
 ```
-
 
 ## Helm Chart Updates
 
