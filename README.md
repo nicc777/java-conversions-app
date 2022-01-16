@@ -53,7 +53,7 @@ Bump the version in the following files:
 * `charts/conversions-chart/Chart.yaml` (specifically, the field `appVersion`) (not required for `V1`)
 * `charts/conversions-chart/values.yaml` (specifically, the fields `application_container_version`) (not required for `V1`)
 
-Remember to push to the `v2` (or `v1`) branch, but not that the actions may fail sine there is already a release:
+Remember to push to the `v2` (or `v1`) branch, but note that the actions may fail sine there is already a release:
 
 ```shell
 git push origin v2
