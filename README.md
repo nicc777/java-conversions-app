@@ -52,7 +52,7 @@ Store the version value in the environment variable `VERSION`. Then commit and p
 ```shell
 export VERSION=2.x.x
 git add .
-git commit -m "refactor: bumped to version $VERSION"
+git commit -m "chore: bumped to version $VERSION"
 git tag -a v$VERSION -m "Release trigger for version ${VERSION}"
 git push origin v2
 
