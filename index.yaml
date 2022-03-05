@@ -12,6 +12,16 @@ entries:
     - https://github.com/nicc777/java-conversions-app/releases/download/conversions-chart-2.5.3/conversions-chart-2.5.3.tgz
     version: 2.5.3
   - apiVersion: v2
+    appVersion: 2.1.22
+    created: "2022-03-05T09:01:27.395544418Z"
+    description: Conversions Service API
+    digest: c53f0d232224ed447886904e1c53f165528be501933cc5bb9054e3025850ab77
+    name: conversions-chart
+    type: application
+    urls:
+    - https://github.com/nicc777/java-conversions-app/releases/download/conversions-chart-2.1.22/conversions-chart-2.1.22.tgz
+    version: 2.1.22
+  - apiVersion: v2
     appVersion: 2.1.21
     created: "2022-01-17T03:10:56.049026476Z"
     description: Conversions Service API
@@ -111,4 +121,4 @@ entries:
     urls:
     - https://github.com/nicc777/java-conversions-app/releases/download/conversions-chart-0.1.11/conversions-chart-0.1.11.tgz
     version: 0.1.11
-generated: "2022-01-17T03:10:56.04926Z"
+generated: "2022-03-05T09:01:27.395704419Z"
