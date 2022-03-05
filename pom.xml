@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>conversions</artifactId>
-	<version>2.1.21</version>	<!-- This should match our tag -->
+	<version>2.1.22</version>	<!-- This should match our tag -->
 	<name>Conversions Demo</name>
 	<description>REST application to do various conversions.</description>
 	<properties>
@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.3</version>
+			<version>1.6.4</version>
 		</dependency>
 
 		<!-- Required for code coverage reporting -->
@@ -66,7 +66,7 @@
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-annotations</artifactId>
-			<version>1.6.4</version>
+			<version>1.6.5</version>
 		</dependency>
 
 		<!-- Stacktrace to String -->
