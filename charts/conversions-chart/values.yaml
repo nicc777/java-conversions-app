@@ -4,4 +4,4 @@ conversions:
 ingres_service_port: 9080
 application_port: 8888
 replica_count: 2
-application_container_version: v2.1.22
+application_container_version: v2.1.23
